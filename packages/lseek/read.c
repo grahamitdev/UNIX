@@ -9,15 +9,17 @@ int main(void)
 {
     int fd = 0;
     char buf[1024] = {0};
-    fd = open("main.c", O_RDWR);
-    int ret = 0;
-    
-    lseek(fd,10,SEEK_SET);
-    while((ret = read(fd,buf,10)))
-    {
-        printf("ret = %d\n",ret);
-    }
 
- 
-    return 0;
+    fd = open("num", O_RDWR);
+    int ret = 0;
+
+    lseek(fd, 3, SEEK_SET);
+    ret = pread(fd,buf,20,0);
+    printf("%d\n",ret);
+    printf("%s\n",buf);
+    
+    int cur = lseek(fd,0,SEEK_CUR);
+    printf("%d\n", cur);
+
+   return 0;
 }
